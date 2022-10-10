@@ -1,6 +1,6 @@
 import {MAX_WORD_SIZE, MAX_ATTEMPTS} from "./env.js";
 
-// import {Letter} from "./Letter.js";
+import {Letter} from "./Letter.js";
 import {Backgroud} from "./ChangeBackground.js"
 import {KeyPressedType} from "./KeyPressedType.js";
 import { IsBackSpaceKey } from "./IsBackspaceKey.js";
@@ -11,7 +11,7 @@ export class Game  {
     #pickedWord: string;
     #actualWord: string;
     #turn: number;
-    // #letter: Letter;
+    #letter: Letter;
     #background: Backgroud;
     #keyPressedType: KeyPressedType;
     #isEnterKey: IsEnterKey;
@@ -23,7 +23,7 @@ export class Game  {
         this.#pickedWord = pickedWord;
         this.#actualWord = "";
         this.#turn = 1;
-        // this.#letter = new Letter();
+        this.#letter = new Letter();
         this.#background = new Backgroud();
         this.#keyPressedType = new KeyPressedType();
         this.#isBackSpaceKey = new IsBackSpaceKey();

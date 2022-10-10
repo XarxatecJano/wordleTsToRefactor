@@ -133,19 +133,19 @@ export class Game {
             location.assign("/loser");
         }
     }
-    backspacePressed() {
-        if (__classPrivateFieldGet(this, _Game_keyPressedType, "f").actualPosition > 0) {
-            __classPrivateFieldGet(this, _Game_keyPressedType, "f").actualPosition -= 1;
-            __classPrivateFieldGet(this, _Game_letter, "f").deleteLetter(__classPrivateFieldGet(this, _Game_turn, "f"), __classPrivateFieldGet(this, _Game_keyPressedType, "f").actualPosition);
-        }
-    }
+    // backspacePressed():void{
+    //     if (this.#keyPressedType.actualPosition > 0) {
+    //         this.#keyPressedType.actualPosition -= 1;
+    //         this.#isBackSpaceKey.backspacePressed(this.#turn, this.#keyPressedType.actualPosition);
+    //     }
+    // }
     newKeyPressed(code) {
         if (__classPrivateFieldGet(this, _Game_keyPressedType, "f").isValidLetter(code))
             this.newLetter(code);
         if (__classPrivateFieldGet(this, _Game_isEnterKey, "f").keyCodeType(code))
             __classPrivateFieldGet(this, _Game_isEnterKey, "f").enterPressed(__classPrivateFieldGet(this, _Game_actualWord, "f"));
         if (__classPrivateFieldGet(this, _Game_isBackSpaceKey, "f").keyCodeType(code))
-            this.backspacePressed();
+            __classPrivateFieldGet(this, _Game_isBackSpaceKey, "f").backspacePressed(__classPrivateFieldGet(this, _Game_turn, "f"), __classPrivateFieldGet(this, _Game_keyPressedType, "f").actualPosition);
         __classPrivateFieldGet(this, _Game_background, "f").changeBackgroundKey(code);
     }
 }
