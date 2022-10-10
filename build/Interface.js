@@ -1,10 +1,12 @@
-export class Interface {
+export class Letter {
     setNewLetter(turn, position, letter) {
         Array.from(document.getElementById(`row_${turn}`).children)[position].textContent = letter;
     }
     deleteLetter(turn, position) {
         Array.from(document.getElementById(`row_${turn}`).children)[position].textContent = "";
     }
+}
+export class Background {
     changeBackgroundPosition(turn, position, state) {
         let positionClass = "cell-grey";
         if (state == "rightLetter")
