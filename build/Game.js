@@ -9,8 +9,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_pickedWord, _Game_actualWord, _Game_turn, _Game_actualPosition, _Game_validLetterCodes, _Game_userInterface;
-import { MAX_WORD_SIZE, MAX_ATTEMPTS } from "./env.js";
+var _Game_pickedWord, _Game_actualWord, _Game_turn, _Game_actualPosition, _Game_userInterface;
+import { MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES } from "./env.js";
 import { UIChanger } from "./UIChanger.js";
 export class Game {
     constructor(pickedWord) {
@@ -18,7 +18,6 @@ export class Game {
         _Game_actualWord.set(this, void 0);
         _Game_turn.set(this, void 0);
         _Game_actualPosition.set(this, void 0);
-        _Game_validLetterCodes.set(this, void 0);
         _Game_userInterface.set(this, void 0);
         this.checkRightLetters = () => {
             for (let i = 0; i < MAX_WORD_SIZE; i++) {
@@ -80,7 +79,6 @@ export class Game {
         __classPrivateFieldSet(this, _Game_actualWord, "", "f");
         __classPrivateFieldSet(this, _Game_turn, 1, "f");
         __classPrivateFieldSet(this, _Game_actualPosition, 0, "f");
-        __classPrivateFieldSet(this, _Game_validLetterCodes, ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Semicolon"], "f");
         __classPrivateFieldSet(this, _Game_userInterface, new UIChanger(), "f");
     }
     get pickedWord() {
@@ -107,12 +105,6 @@ export class Game {
     set actualPosition(num) {
         __classPrivateFieldSet(this, _Game_actualPosition, num, "f");
     }
-    get validLetterCodes() {
-        return __classPrivateFieldGet(this, _Game_validLetterCodes, "f");
-    }
-    set validLetterCodes(letters) {
-        __classPrivateFieldSet(this, _Game_validLetterCodes, letters, "f");
-    }
     get interface() {
         return __classPrivateFieldGet(this, _Game_userInterface, "f");
     }
@@ -120,7 +112,7 @@ export class Game {
         __classPrivateFieldSet(this, _Game_userInterface, i, "f");
     }
     isValidLetter(code) {
-        return __classPrivateFieldGet(this, _Game_validLetterCodes, "f").includes(code) && __classPrivateFieldGet(this, _Game_actualPosition, "f") < MAX_WORD_SIZE;
+        return VALID_LETTER_CODES.includes(code) && __classPrivateFieldGet(this, _Game_actualPosition, "f") < MAX_WORD_SIZE;
     }
     isEnterKey(code) {
         return code == "Enter";
@@ -175,4 +167,4 @@ export class Game {
         __classPrivateFieldGet(this, _Game_userInterface, "f").changeBackgroundKey(code);
     }
 }
-_Game_pickedWord = new WeakMap(), _Game_actualWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_actualPosition = new WeakMap(), _Game_validLetterCodes = new WeakMap(), _Game_userInterface = new WeakMap();
+_Game_pickedWord = new WeakMap(), _Game_actualWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_actualPosition = new WeakMap(), _Game_userInterface = new WeakMap();

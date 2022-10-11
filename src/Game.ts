@@ -1,4 +1,4 @@
-import {MAX_WORD_SIZE, MAX_ATTEMPTS} from "./env.js";
+import {MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES} from "./env.js";
 import {UIChanger} from "./UIChanger.js";
 
 export class Game {
@@ -6,14 +6,12 @@ export class Game {
     #actualWord: string
     #turn: number
     #actualPosition: number
-    #validLetterCodes: string[]
     #userInterface: UIChanger
     constructor(pickedWord: string){
         this.#pickedWord = pickedWord;
         this.#actualWord = "";
         this.#turn = 1;
         this.#actualPosition = 0;
-        this.#validLetterCodes = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Semicolon"];
         this.#userInterface = new UIChanger();
     }
 
@@ -45,13 +43,6 @@ export class Game {
         this.#actualPosition = num;
     }
 
-    get validLetterCodes() {
-        return this.#validLetterCodes
-    }
-    set validLetterCodes(letters) {
-        this.#validLetterCodes = letters;
-    }
-
     get interface() {
         return this.#userInterface;
     }
@@ -61,7 +52,7 @@ export class Game {
     
     isValidLetter(code: string):boolean {
         
-        return  this.#validLetterCodes.includes(code) && this.#actualPosition < MAX_WORD_SIZE;
+        return  VALID_LETTER_CODES.includes(code) && this.#actualPosition < MAX_WORD_SIZE;
      }
 
     isEnterKey(code: string):boolean {
