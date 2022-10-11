@@ -102,17 +102,11 @@ export class Game {
     set currentPosition(num) {
         __classPrivateFieldSet(this, _Game_currentPosition, num, "f");
     }
-    get interface() {
+    get userInterface() {
         return __classPrivateFieldGet(this, _Game_userInterface, "f");
     }
     isValidLetter(code) {
         return VALID_LETTER_CODES.includes(code) && __classPrivateFieldGet(this, _Game_currentPosition, "f") < MAX_WORD_SIZE;
-    }
-    isEnterKey(code) {
-        return code == "Enter";
-    }
-    isBackspaceKey(code) {
-        return code == "Backspace";
     }
     transformCodeToLetter(code) {
         let letter = "";
@@ -121,12 +115,6 @@ export class Game {
         else
             letter = code.split("y")[1];
         return letter;
-    }
-    newLetter(code) {
-        let letter = this.transformCodeToLetter(code);
-        __classPrivateFieldGet(this, _Game_userInterface, "f").setNewLetter(this.turn, this.currentPosition, letter);
-        __classPrivateFieldSet(this, _Game_currentPosition, __classPrivateFieldGet(this, _Game_currentPosition, "f") + 1, "f");
-        __classPrivateFieldSet(this, _Game_currentWord, __classPrivateFieldGet(this, _Game_currentWord, "f") + letter, "f");
     }
     checkWordIsRight() {
         if (__classPrivateFieldGet(this, _Game_currentWord, "f") == __classPrivateFieldGet(this, _Game_pickedWord, "f")) {
@@ -138,27 +126,9 @@ export class Game {
             location.assign("/loser");
         }
     }
-    enterPressed() {
-        if (__classPrivateFieldGet(this, _Game_currentWord, "f").length == MAX_WORD_SIZE) {
-            this.checkWordIsRight();
-            this.checkGameIsOver();
-            this.updateAfterANewWord();
-        }
-    }
-    backspacePressed() {
-        if (__classPrivateFieldGet(this, _Game_currentPosition, "f") > 0) {
-            __classPrivateFieldSet(this, _Game_currentPosition, __classPrivateFieldGet(this, _Game_currentPosition, "f") - 1, "f");
-            __classPrivateFieldGet(this, _Game_userInterface, "f").deleteLetter(__classPrivateFieldGet(this, _Game_turn, "f"), __classPrivateFieldGet(this, _Game_currentPosition, "f"));
-        }
-    }
-    newKeyPressed(code) {
-        if (this.isValidLetter(code))
-            this.newLetter(code);
-        if (this.isEnterKey(code))
-            this.enterPressed();
-        if (this.isBackspaceKey(code))
-            this.backspacePressed();
-        __classPrivateFieldGet(this, _Game_userInterface, "f").changeBackgroundKey(code);
+    newKeyPressed(key) {
+        key.pressed();
+        key.game.userInterface.changeBackgroundKey(key.code);
     }
 }
 _Game_pickedWord = new WeakMap(), _Game_currentWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_currentPosition = new WeakMap(), _Game_userInterface = new WeakMap();

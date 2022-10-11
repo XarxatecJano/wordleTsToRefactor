@@ -1,4 +1,5 @@
 import {MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES} from "./env.js";
+import { Key } from "./Key.js";
 import {UIChanger} from "./UIChanger.js";
 
 export class Game {
@@ -40,7 +41,7 @@ export class Game {
         this.#currentPosition = num;
     }
 
-    get interface() {
+    get userInterface() {
         return this.#userInterface;
     }
     
@@ -49,14 +50,6 @@ export class Game {
         return  VALID_LETTER_CODES.includes(code) && this.#currentPosition < MAX_WORD_SIZE;
      }
 
-    isEnterKey(code: string):boolean {
-        return code=="Enter";
-    }
-
-    isBackspaceKey(code: string):boolean{
-        return code=="Backspace";
-    }
-
     transformCodeToLetter(code: string):string{
         let letter: string = "";
         if (code=="Semicolon") letter = "Ñ";
@@ -64,12 +57,6 @@ export class Game {
         return letter;
     }
 
-    newLetter(code: string):void{
-        let letter: string = this.transformCodeToLetter(code);
-        this.#userInterface.setNewLetter(this.turn, this.currentPosition, letter);
-        this.#currentPosition = this.#currentPosition + 1;
-        this.#currentWord += letter;
-    }
 
     checkWordIsRight():void{
         if (this.#currentWord == this.#pickedWord){
@@ -142,26 +129,10 @@ export class Game {
         }
     }
 
-    enterPressed():void{
-        if (this.#currentWord.length == MAX_WORD_SIZE){
-            this.checkWordIsRight();
-            this.checkGameIsOver();
-            this.updateAfterANewWord();
-        }
-    }
 
-    backspacePressed():void{
-        if (this.#currentPosition > 0) {
-            this.#currentPosition -= 1;
-            this.#userInterface.deleteLetter(this.#turn, this.#currentPosition);
-        }
-    }
-
-    newKeyPressed(code: string):void{ 
-        if (this.isValidLetter(code)) this.newLetter(code);
-        if (this.isEnterKey(code)) this.enterPressed();
-        if (this.isBackspaceKey(code)) this.backspacePressed();
-        this.#userInterface.changeBackgroundKey(code);
+    newKeyPressed(key: Key):void{
+        key.pressed();
+        key.game.userInterface.changeBackgroundKey(key.code);
     }
 
     
