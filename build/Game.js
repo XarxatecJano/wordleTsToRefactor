@@ -84,9 +84,6 @@ export class Game {
     get pickedWord() {
         return __classPrivateFieldGet(this, _Game_pickedWord, "f");
     }
-    set pickedWord(word) {
-        __classPrivateFieldSet(this, _Game_pickedWord, word, "f");
-    }
     get currentWord() {
         return __classPrivateFieldGet(this, _Game_currentWord, "f");
     }
@@ -107,9 +104,6 @@ export class Game {
     }
     get interface() {
         return __classPrivateFieldGet(this, _Game_userInterface, "f");
-    }
-    set interface(i) {
-        __classPrivateFieldSet(this, _Game_userInterface, i, "f");
     }
     isValidLetter(code) {
         return VALID_LETTER_CODES.includes(code) && __classPrivateFieldGet(this, _Game_currentPosition, "f") < MAX_WORD_SIZE;

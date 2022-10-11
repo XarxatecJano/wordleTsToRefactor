@@ -18,9 +18,6 @@ export class Game {
     get pickedWord(){
         return this.#pickedWord;
     }
-    set pickedWord(word){
-        this.#pickedWord = word;
-    }
 
     get currentWord(){
         return this.#currentWord;
@@ -45,9 +42,6 @@ export class Game {
 
     get interface() {
         return this.#userInterface;
-    }
-    set interface(i) {
-        this.#userInterface = i;
     }
     
     isValidLetter(code: string):boolean {
