@@ -3,15 +3,15 @@ import {UIChanger} from "./UIChanger.js";
 
 export class Game {
     #pickedWord: string
-    #actualWord: string
+    #currentWord: string
     #turn: number
-    #actualPosition: number
+    #currentPosition: number
     #userInterface: UIChanger
     constructor(pickedWord: string){
         this.#pickedWord = pickedWord;
-        this.#actualWord = "";
+        this.#currentWord = "";
         this.#turn = 1;
-        this.#actualPosition = 0;
+        this.#currentPosition = 0;
         this.#userInterface = new UIChanger();
     }
 
@@ -22,11 +22,11 @@ export class Game {
         this.#pickedWord = word;
     }
 
-    get actualWord(){
-        return this.#actualWord;
+    get currentWord(){
+        return this.#currentWord;
     }
-    set actualWord(word){
-        this.#actualWord = word;
+    set currentWord(word){
+        this.#currentWord = word;
     }
 
     get turn(){
@@ -36,11 +36,11 @@ export class Game {
         this.#turn = num;
     }
 
-    get actualPosition(){
-        return this.#actualPosition;
+    get currentPosition(){
+        return this.#currentPosition;
     }
-    set actualPosition(num){
-        this.#actualPosition = num;
+    set currentPosition(num){
+        this.#currentPosition = num;
     }
 
     get interface() {
@@ -52,7 +52,7 @@ export class Game {
     
     isValidLetter(code: string):boolean {
         
-        return  VALID_LETTER_CODES.includes(code) && this.#actualPosition < MAX_WORD_SIZE;
+        return  VALID_LETTER_CODES.includes(code) && this.#currentPosition < MAX_WORD_SIZE;
      }
 
     isEnterKey(code: string):boolean {
@@ -72,48 +72,48 @@ export class Game {
 
     newLetter(code: string):void{
         let letter: string = this.transformCodeToLetter(code);
-        this.#userInterface.setNewLetter(this.turn, this.actualPosition, letter);
-        this.#actualPosition = this.#actualPosition + 1;
-        this.#actualWord += letter;
+        this.#userInterface.setNewLetter(this.turn, this.currentPosition, letter);
+        this.#currentPosition = this.#currentPosition + 1;
+        this.#currentWord += letter;
     }
 
     checkWordIsRight():void{
-        if (this.#actualWord == this.#pickedWord){
+        if (this.#currentWord == this.#pickedWord){
             location.assign("/winner");
         }
     }
 
     checkRightLetters = ():void=>{
         for(let i=0; i<MAX_WORD_SIZE; i++){
-            if (this.#pickedWord[i]==this.#actualWord[i]){
+            if (this.#pickedWord[i]==this.#currentWord[i]){
                 this.#userInterface.changeBackgroundPosition(this.#turn, i, "rightLetter");
             }
         }
     }
 
     checkMisplacedLetters = ():void=> {
-        let actualLetter: string = "";
+        let currentLetter: string = "";
         let pattern: RegExp;
         let numberOfCoincidencesPickedWord: number = 0;
-        let numberOfCoincidencesActualWord: number = 0;
+        let numberOfCoincidencescurrentWord: number = 0;
         let differenceOfCoincidences: number = 0;
         let isMisplacedLetter: boolean = true;
         for (let i=0; i<MAX_WORD_SIZE; i++){
             isMisplacedLetter = true;
-            actualLetter = this.#actualWord[i];
-            pattern = new RegExp(actualLetter,"g");
+            currentLetter = this.#currentWord[i];
+            pattern = new RegExp(currentLetter,"g");
             numberOfCoincidencesPickedWord = (this.#pickedWord.match(pattern)||[]).length;
-            numberOfCoincidencesActualWord = (this.#actualWord.match(pattern)||[]).length;
-            differenceOfCoincidences = Math.abs(numberOfCoincidencesActualWord - numberOfCoincidencesPickedWord);
+            numberOfCoincidencescurrentWord = (this.#currentWord.match(pattern)||[]).length;
+            differenceOfCoincidences = Math.abs(numberOfCoincidencescurrentWord - numberOfCoincidencesPickedWord);
             if (differenceOfCoincidences==1){
                 for (let j=0; j<MAX_WORD_SIZE; j++){
-                    if(this.#pickedWord[j]==actualLetter) {
+                    if(this.#pickedWord[j]==currentLetter) {
                         isMisplacedLetter = false;
                         break;
                     }
                 }
             }
-            if (differenceOfCoincidences==0 && this.#pickedWord[i]==this.#actualWord[i]){
+            if (differenceOfCoincidences==0 && this.#pickedWord[i]==this.#currentWord[i]){
                 isMisplacedLetter=false;
             }
             if (numberOfCoincidencesPickedWord>0 && isMisplacedLetter) this.#userInterface.changeBackgroundPosition(this.#turn, i, "misplacedLetter");
@@ -122,12 +122,12 @@ export class Game {
     }
 
     checkWrongLetters = ():void=>{
-        let actualLetter = "";
+        let currentLetter = "";
         let pattern:RegExp;
         let numberOfCoincidencesPickedWord = 0;
         for (let i=0; i<MAX_WORD_SIZE; i++){
-            actualLetter = this.#actualWord[i];
-            pattern = new RegExp(actualLetter,"g");
+            currentLetter = this.#currentWord[i];
+            pattern = new RegExp(currentLetter,"g");
             numberOfCoincidencesPickedWord = (this.#pickedWord.match(pattern)||[]).length;
             if (numberOfCoincidencesPickedWord==0) this.#userInterface.changeBackgroundPosition(this.#turn, i, "wrongLetter");
         }
@@ -138,8 +138,8 @@ export class Game {
         this.checkMisplacedLetters();
         this.checkWrongLetters();
         this.#turn = this.#turn + 1;
-        this.#actualPosition = 0;
-        this.#actualWord = "";
+        this.#currentPosition = 0;
+        this.#currentWord = "";
     }
 
     checkGameIsOver():void{
@@ -149,7 +149,7 @@ export class Game {
     }
 
     enterPressed():void{
-        if (this.#actualWord.length == MAX_WORD_SIZE){
+        if (this.#currentWord.length == MAX_WORD_SIZE){
             this.checkWordIsRight();
             this.checkGameIsOver();
             this.updateAfterANewWord();
@@ -157,9 +157,9 @@ export class Game {
     }
 
     backspacePressed():void{
-        if (this.#actualPosition > 0) {
-            this.#actualPosition -= 1;
-            this.#userInterface.deleteLetter(this.#turn, this.#actualPosition);
+        if (this.#currentPosition > 0) {
+            this.#currentPosition -= 1;
+            this.#userInterface.deleteLetter(this.#turn, this.#currentPosition);
         }
     }
 
