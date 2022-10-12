@@ -4,15 +4,17 @@ import { LetterKey } from "./LetterKey.js";
 import { BackspaceKey } from "./BackspaceKey.js";
 import { EnterKey } from "./EnterKey.js";
 import { InvalidKey } from "./InvalidKey.js";
+import { LetterCheck } from "./LetterCheck.js";
 const wordsCollection = new Word(["JUEGO", "TALAR", "BAILE", "ANDAR", "MONTE", "PLAYA", "PLATA", "ARBOL", "QUESO"]);
 const pickedWord = wordsCollection.getRandomWord();
-console.log(pickedWord);
 const game = new Game(pickedWord);
+const letterCheck = new LetterCheck(game);
+console.log(pickedWord);
 function generateKey(code) {
     let returnKey;
     switch (code) {
         case "Enter": {
-            returnKey = new EnterKey(game, code);
+            returnKey = new EnterKey(game, code, letterCheck);
             break;
         }
         case "Backspace": {
@@ -20,7 +22,7 @@ function generateKey(code) {
             break;
         }
         default: {
-            if (game.isValidLetter(code)) {
+            if (letterCheck.isValidLetter(code)) {
                 returnKey = new LetterKey(game, code);
             }
             else {
