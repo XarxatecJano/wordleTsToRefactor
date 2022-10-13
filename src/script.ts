@@ -5,19 +5,23 @@ import {BackspaceKey} from "./BackspaceKey.js";
 import {EnterKey} from "./EnterKey.js"
 import {InvalidKey} from "./InvalidKey.js";
 import { Key } from "./Key.js";
+import {LetterCheck} from "./LetterCheck.js";
+import { UIChanger } from "./UIChanger.js";
 
 
 const wordsCollection: Word = new Word(["JUEGO", "TALAR", "BAILE", "ANDAR", "MONTE", "PLAYA", "PLATA", "ARBOL", "QUESO"]);
 const pickedWord: string = wordsCollection.getRandomWord();
-console.log(pickedWord);
+const userInterface: UIChanger = new UIChanger();
+const game: Game = new Game(pickedWord, userInterface);
+const letterCheck: LetterCheck = new LetterCheck(game);
 
-const game: Game = new Game(pickedWord);
+console.log(pickedWord);
 
 function generateKey(code: string): Key{
     let returnKey: Key;
     switch (code){
         case "Enter": {
-            returnKey = new EnterKey(game, code);
+            returnKey = new EnterKey(game, code, letterCheck);
             break;
         }
         case "Backspace": {
@@ -25,7 +29,7 @@ function generateKey(code: string): Key{
             break;
         }
         default: {
-            if(game.isValidLetter(code)) {
+            if(letterCheck.isValidLetter(code)) {
                 returnKey = new LetterKey(game, code);
             } else {
                 returnKey = new InvalidKey(game, code);
