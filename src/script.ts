@@ -6,12 +6,15 @@ import {EnterKey} from "./EnterKey.js"
 import {InvalidKey} from "./InvalidKey.js";
 import { Key } from "./Key.js";
 import {LetterCheck} from "./LetterCheck.js";
+import { UIChanger } from "./UIChanger.js";
 
 
 const wordsCollection: Word = new Word(["JUEGO", "TALAR", "BAILE", "ANDAR", "MONTE", "PLAYA", "PLATA", "ARBOL", "QUESO"]);
 const pickedWord: string = wordsCollection.getRandomWord();
-const game: Game = new Game(pickedWord);
+const userInterface: UIChanger = new UIChanger();
+const game: Game = new Game(pickedWord, userInterface);
 const letterCheck: LetterCheck = new LetterCheck(game);
+
 console.log(pickedWord);
 
 function generateKey(code: string): Key{

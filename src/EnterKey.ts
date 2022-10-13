@@ -18,6 +18,7 @@ export class EnterKey extends Key {
             super.game.winCondition();
             super.game.loseCondition();
             this.#letterCheck.updateAfterANewWord();
+            
         }
     }
 }

@@ -9,21 +9,20 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_pickedWord, _Game_currentWord, _Game_turn, _Game_currentPosition, _Game_userInterface;
+var _Game_pickedWord, _Game_currentWord, _Game_turn, _Game_currentPosition, _Game_ui;
 import { MAX_ATTEMPTS } from "./env.js";
-import { UIChanger } from "./UIChanger.js";
 export class Game {
-    constructor(pickedWord) {
+    constructor(pickedWord, ui) {
         _Game_pickedWord.set(this, void 0);
         _Game_currentWord.set(this, void 0);
         _Game_turn.set(this, void 0);
         _Game_currentPosition.set(this, void 0);
-        _Game_userInterface.set(this, void 0);
+        _Game_ui.set(this, void 0);
         __classPrivateFieldSet(this, _Game_pickedWord, pickedWord, "f");
         __classPrivateFieldSet(this, _Game_currentWord, "", "f");
         __classPrivateFieldSet(this, _Game_turn, 1, "f");
         __classPrivateFieldSet(this, _Game_currentPosition, 0, "f");
-        __classPrivateFieldSet(this, _Game_userInterface, new UIChanger(), "f");
+        __classPrivateFieldSet(this, _Game_ui, ui, "f");
     }
     get pickedWord() {
         return __classPrivateFieldGet(this, _Game_pickedWord, "f");
@@ -47,7 +46,7 @@ export class Game {
         __classPrivateFieldSet(this, _Game_currentPosition, num, "f");
     }
     get userInterface() {
-        return __classPrivateFieldGet(this, _Game_userInterface, "f");
+        return __classPrivateFieldGet(this, _Game_ui, "f");
     }
     transformCodeToLetter(code) {
         let letter = "";
@@ -69,7 +68,7 @@ export class Game {
     }
     newKeyPressed(key) {
         key.pressed();
-        key.game.userInterface.changeBackgroundKey(key.code);
+        __classPrivateFieldGet(key.game, _Game_ui, "f").changeBackgroundKey(key.code, __classPrivateFieldGet(this, _Game_currentPosition, "f"));
     }
 }
-_Game_pickedWord = new WeakMap(), _Game_currentWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_currentPosition = new WeakMap(), _Game_userInterface = new WeakMap();
+_Game_pickedWord = new WeakMap(), _Game_currentWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_currentPosition = new WeakMap(), _Game_ui = new WeakMap();

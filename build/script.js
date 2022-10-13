@@ -5,9 +5,11 @@ import { BackspaceKey } from "./BackspaceKey.js";
 import { EnterKey } from "./EnterKey.js";
 import { InvalidKey } from "./InvalidKey.js";
 import { LetterCheck } from "./LetterCheck.js";
+import { UIChanger } from "./UIChanger.js";
 const wordsCollection = new Word(["JUEGO", "TALAR", "BAILE", "ANDAR", "MONTE", "PLAYA", "PLATA", "ARBOL", "QUESO"]);
 const pickedWord = wordsCollection.getRandomWord();
-const game = new Game(pickedWord);
+const userInterface = new UIChanger();
+const game = new Game(pickedWord, userInterface);
 const letterCheck = new LetterCheck(game);
 console.log(pickedWord);
 function generateKey(code) {

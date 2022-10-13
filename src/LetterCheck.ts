@@ -8,6 +8,7 @@ export class LetterCheck {
     this.#game = game;
 
   }
+  
   checkRightLetters = ():void=>{
   for(let i=0; i<MAX_WORD_SIZE; i++){
       if (this.#game.pickedWord[i]==this.#game.currentWord[i]){
@@ -61,14 +62,12 @@ export class LetterCheck {
         
    return  VALID_LETTER_CODES.includes(code) && this.#game.currentPosition < MAX_WORD_SIZE;
 }
-
   updateAfterANewWord = ():void=>{
-    this.checkRightLetters();
-    this.checkMisplacedLetters();
-    this.checkWrongLetters();
-    this.#game.turn = this.#game.turn + 1;
-    this.#game.currentPosition = 0;
-    this.#game.currentWord = "";
+  this.checkRightLetters();
+  this.checkMisplacedLetters();
+  this.checkWrongLetters();
+  this.#game.turn = this.#game.turn + 1;
+  this.#game.currentPosition = 0;
+  this.#game.currentWord = "";
 }
- 
 }

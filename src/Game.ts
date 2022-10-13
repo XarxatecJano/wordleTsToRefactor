@@ -2,18 +2,21 @@ import {MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES} from "./env.js";
 import { Key } from "./Key.js";
 import {UIChanger} from "./UIChanger.js";
 
+
+
 export class Game {
     #pickedWord: string
     #currentWord: string
     #turn: number
     #currentPosition: number
-    #userInterface: UIChanger
-    constructor(pickedWord: string){
+    #ui: UIChanger
+    constructor(pickedWord: string, ui: UIChanger){
         this.#pickedWord = pickedWord;
         this.#currentWord = "";
         this.#turn = 1;
         this.#currentPosition = 0;
-        this.#userInterface = new UIChanger();
+        this.#ui = ui;
+    
     }
 
     get pickedWord(){
@@ -42,7 +45,7 @@ export class Game {
     }
 
     get userInterface() {
-        return this.#userInterface;
+        return this.#ui;
     }
     
 
@@ -52,6 +55,7 @@ export class Game {
         else letter = code.split("y")[1];
         return letter;
     }
+
 
     winCondition():void{
         if (this.#currentWord == this.#pickedWord){
@@ -68,8 +72,13 @@ export class Game {
 
     newKeyPressed(key: Key):void{
         key.pressed();
-        key.game.userInterface.changeBackgroundKey(key.code);
+        key.game.#ui.changeBackgroundKey(key.code, this.#currentPosition);
+        
     }
+
 
     
 }
+
+
+
