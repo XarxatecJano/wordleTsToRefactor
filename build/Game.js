@@ -49,21 +49,10 @@ export class Game {
                 
             }
         }
-    
-        checkWrongLetters = ():void=>{
-            let currentLetter = "";
-            let pattern:RegExp;
-            let numberOfCoincidencesPickedWord = 0;
-            for (let i=0; i<MAX_WORD_SIZE; i++){
-                currentLetter = this.#currentWord[i];
-                pattern = new RegExp(currentLetter,"g");
-                numberOfCoincidencesPickedWord = (this.#pickedWord.match(pattern)||[]).length;
-                if (numberOfCoincidencesPickedWord==0) this.#userInterface.changeBackgroundPosition(this.#turn, i, "wrongLetter");
-            }
-        }*/
+    */
         this.updateAfterANewWord = () => {
             WordUtilities.checkRightLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
-            //this.checkMisplacedLetters();
+            WordUtilities.checkMisplacedLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
             WordUtilities.checkWrongLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
             __classPrivateFieldSet(this, _Game_turn, __classPrivateFieldGet(this, _Game_turn, "f") + 1, "f");
             __classPrivateFieldSet(this, _Game_currentPosition, 0, "f");

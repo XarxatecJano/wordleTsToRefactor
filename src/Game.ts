@@ -65,41 +65,9 @@ export class Game {
         }
     }
 
-
-    /*checkMisplacedLetters = ():void=> {
-        let currentLetter: string = "";
-        let pattern: RegExp;
-        let numberOfCoincidencesPickedWord: number = 0;
-        let numberOfCoincidencescurrentWord: number = 0;
-        let differenceOfCoincidences: number = 0;
-        let isMisplacedLetter: boolean = true;
-        for (let i=0; i<MAX_WORD_SIZE; i++){
-            isMisplacedLetter = true;
-            currentLetter = this.#currentWord[i];
-            pattern = new RegExp(currentLetter,"g");
-            numberOfCoincidencesPickedWord = (this.#pickedWord.match(pattern)||[]).length;
-            numberOfCoincidencescurrentWord = (this.#currentWord.match(pattern)||[]).length;
-            differenceOfCoincidences = Math.abs(numberOfCoincidencescurrentWord - numberOfCoincidencesPickedWord);
-            if (differenceOfCoincidences==1){
-                for (let j=0; j<MAX_WORD_SIZE; j++){
-                    if(this.#pickedWord[j]==currentLetter) {
-                        isMisplacedLetter = false;
-                        break;
-                    }
-                }
-            }
-            if (differenceOfCoincidences==0 && this.#pickedWord[i]==this.#currentWord[i]){
-                isMisplacedLetter=false;
-            }
-            if (numberOfCoincidencesPickedWord>0 && isMisplacedLetter) this.#userInterface.changeBackgroundPosition(this.#turn, i, "misplacedLetter");
-            
-        }
-    }
-*/
-
     updateAfterANewWord = ():void=>{
         WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        //this.checkMisplacedLetters();
+        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
         WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
         this.#turn = this.#turn + 1;
         this.#currentPosition = 0;
