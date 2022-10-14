@@ -18,6 +18,7 @@ export class Game {
         this.#ui = ui;
     
     }
+    //Hola buenos días//
 
     get pickedWord(){
         return this.#pickedWord;
