@@ -23,5 +23,9 @@ export class Key {
     get code() {
         return __classPrivateFieldGet(this, _Key_code, "f");
     }
+    newKeyPressed() {
+        this.pressed();
+        __classPrivateFieldGet(this, _Key_game, "f").userInterface.changeBackgroundKey(__classPrivateFieldGet(this, _Key_code, "f"));
+    }
 }
 _Key_game = new WeakMap(), _Key_code = new WeakMap();

@@ -52,14 +52,12 @@ export class Game {
     isValidLetter(code) {
         return VALID_LETTER_CODES.includes(code) && __classPrivateFieldGet(this, _Game_currentPosition, "f") < MAX_WORD_SIZE;
     }
-    transformCodeToLetter(code) {
-        let letter = "";
-        if (code == "Semicolon")
-            letter = "Ñ";
-        else
-            letter = code.split("y")[1];
+    /*transformCodeToLetter(code: string):string{
+        let letter: string = "";
+        if (code=="Semicolon") letter = "Ñ";
+        else letter = code.split("y")[1];
         return letter;
-    }
+    }*/
     checkWordIsRight() {
         if (__classPrivateFieldGet(this, _Game_currentWord, "f") == __classPrivateFieldGet(this, _Game_pickedWord, "f")) {
             location.assign("/winner");
@@ -70,19 +68,10 @@ export class Game {
         __classPrivateFieldSet(this, _Game_currentPosition, 0, "f");
         __classPrivateFieldSet(this, _Game_currentWord, "", "f");
     }
-    /*updateUIAfterANewWord = ():void=>{
-        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
-    }*/
     checkGameIsOver() {
         if (this.turn == MAX_ATTEMPTS) {
             location.assign("/loser");
         }
-    }
-    newKeyPressed(key) {
-        key.pressed();
-        key.game.userInterface.changeBackgroundKey(key.code);
     }
 }
 _Game_pickedWord = new WeakMap(), _Game_currentWord = new WeakMap(), _Game_turn = new WeakMap(), _Game_currentPosition = new WeakMap(), _Game_userInterface = new WeakMap();

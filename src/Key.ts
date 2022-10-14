@@ -15,4 +15,9 @@ export abstract class Key {
     }
 
     abstract pressed():void;
+
+    newKeyPressed():void{
+        this.pressed();
+        this.#game.userInterface.changeBackgroundKey(this.#code);
+    }
 }

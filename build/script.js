@@ -33,9 +33,9 @@ function generateKey(code) {
 }
 Array.from(document.getElementsByClassName("key")).forEach(element => element.addEventListener("click", (e) => {
     const keyFromHTML = generateKey(e.target.value);
-    game.newKeyPressed(keyFromHTML);
+    keyFromHTML.newKeyPressed();
 }));
 document.addEventListener("keydown", (e) => {
     const keyFromKeyboard = generateKey(e.code);
-    game.newKeyPressed(keyFromKeyboard);
+    keyFromKeyboard.newKeyPressed();
 });

@@ -40,10 +40,10 @@ function generateKey(code: string): Key{
 
 Array.from(document.getElementsByClassName("key")).forEach(element => element.addEventListener("click", (e)=>{
     const keyFromHTML:Key = generateKey((<HTMLButtonElement>e.target).value);
-    game.newKeyPressed(keyFromHTML);
+    keyFromHTML.newKeyPressed();
 }));
 
 document.addEventListener("keydown", (e)=>{
     const keyFromKeyboard:Key = generateKey(e.code);
-    game.newKeyPressed(keyFromKeyboard);
+    keyFromKeyboard.newKeyPressed();
 });

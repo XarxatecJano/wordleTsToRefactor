@@ -51,12 +51,12 @@ export class Game {
         return  VALID_LETTER_CODES.includes(code) && this.#currentPosition < MAX_WORD_SIZE;
      }
 
-    transformCodeToLetter(code: string):string{
+    /*transformCodeToLetter(code: string):string{
         let letter: string = "";
         if (code=="Semicolon") letter = "Ñ";
         else letter = code.split("y")[1];
         return letter;
-    }
+    }*/
 
 
     checkWordIsRight():void{
@@ -76,11 +76,6 @@ export class Game {
         if (this.turn == MAX_ATTEMPTS){
             location.assign("/loser");
         }
-    }
-
-    newKeyPressed(key: Key):void{
-        key.pressed();
-        key.game.userInterface.changeBackgroundKey(key.code);
     }
 
     
