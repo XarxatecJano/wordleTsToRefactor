@@ -49,4 +49,9 @@ export class WordUtilities {
                 UIChanger.changeBackgroundPosition(turn, i, "misplacedLetter");
         }
     }
+    static updateUIAfterANewWord(pickedWord, currentWord, turn) {
+        this.checkRightLetters(pickedWord, currentWord, turn);
+        this.checkMisplacedLetters(pickedWord, currentWord, turn);
+        this.checkWrongLetters(pickedWord, currentWord, turn);
+    }
 }

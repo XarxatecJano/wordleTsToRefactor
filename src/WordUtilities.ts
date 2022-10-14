@@ -52,4 +52,10 @@ export class WordUtilities {
             
         }
     }
+
+    static updateUIAfterANewWord(pickedWord:string, currentWord:string, turn: number):void{
+        this.checkRightLetters(pickedWord, currentWord, turn);
+        this.checkMisplacedLetters(pickedWord, currentWord, turn);
+        this.checkWrongLetters(pickedWord, currentWord, turn);
+    }
 }

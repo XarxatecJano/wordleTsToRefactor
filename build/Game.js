@@ -12,7 +12,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Game_pickedWord, _Game_currentWord, _Game_turn, _Game_currentPosition, _Game_userInterface;
 import { MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES } from "./env.js";
 import { UIChanger } from "./UIChanger.js";
-import { WordUtilities } from './WordUtilities.js';
 export class Game {
     constructor(pickedWord) {
         _Game_pickedWord.set(this, void 0);
@@ -20,11 +19,6 @@ export class Game {
         _Game_turn.set(this, void 0);
         _Game_currentPosition.set(this, void 0);
         _Game_userInterface.set(this, void 0);
-        this.updateUIAfterANewWord = () => {
-            WordUtilities.checkRightLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
-            WordUtilities.checkMisplacedLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
-            WordUtilities.checkWrongLetters(__classPrivateFieldGet(this, _Game_pickedWord, "f"), __classPrivateFieldGet(this, _Game_currentWord, "f"), __classPrivateFieldGet(this, _Game_turn, "f"));
-        };
         __classPrivateFieldSet(this, _Game_pickedWord, pickedWord, "f");
         __classPrivateFieldSet(this, _Game_currentWord, "", "f");
         __classPrivateFieldSet(this, _Game_turn, 1, "f");
@@ -76,6 +70,11 @@ export class Game {
         __classPrivateFieldSet(this, _Game_currentPosition, 0, "f");
         __classPrivateFieldSet(this, _Game_currentWord, "", "f");
     }
+    /*updateUIAfterANewWord = ():void=>{
+        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
+        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
+        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
+    }*/
     checkGameIsOver() {
         if (this.turn == MAX_ATTEMPTS) {
             location.assign("/loser");

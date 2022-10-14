@@ -71,18 +71,12 @@ export class Game {
         this.#currentWord = "";
     }
 
-    updateUIAfterANewWord = ():void=>{
-        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
-    }
 
     checkGameIsOver():void{
         if (this.turn == MAX_ATTEMPTS){
             location.assign("/loser");
         }
     }
-
 
     newKeyPressed(key: Key):void{
         key.pressed();
