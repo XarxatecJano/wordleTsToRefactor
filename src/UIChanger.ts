@@ -5,7 +5,7 @@ export class UIChanger {
     deleteLetter(turn: number, position: number) {
         Array.from(document.getElementById(`row_${turn}`)!.children)[position].textContent = "";
     }
-    changeBackgroundPosition(turn: number, position: number, state: string){
+    static changeBackgroundPosition(turn: number, position: number, state: string){
         let positionClass = "cell-grey";
         if (state=="rightLetter") positionClass = "cell-green";
         if (state=="misplacedLetter") positionClass = "cell-orange";

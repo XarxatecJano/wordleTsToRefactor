@@ -1,6 +1,7 @@
 import {MAX_WORD_SIZE, MAX_ATTEMPTS, VALID_LETTER_CODES} from "./env.js";
 import { Key } from "./Key.js";
 import {UIChanger} from "./UIChanger.js";
+import {WordUtilities} from './WordUtilities.js';
 
 export class Game {
     #pickedWord: string
@@ -15,7 +16,6 @@ export class Game {
         this.#currentPosition = 0;
         this.#userInterface = new UIChanger();
     }
-    //Hola buenos días//
 
     get pickedWord(){
         return this.#pickedWord;
@@ -65,15 +65,8 @@ export class Game {
         }
     }
 
-    checkRightLetters = ():void=>{
-        for(let i=0; i<MAX_WORD_SIZE; i++){
-            if (this.#pickedWord[i]==this.#currentWord[i]){
-                this.#userInterface.changeBackgroundPosition(this.#turn, i, "rightLetter");
-            }
-        }
-    }
 
-    checkMisplacedLetters = ():void=> {
+    /*checkMisplacedLetters = ():void=> {
         let currentLetter: string = "";
         let pattern: RegExp;
         let numberOfCoincidencesPickedWord: number = 0;
@@ -102,23 +95,12 @@ export class Game {
             
         }
     }
-
-    checkWrongLetters = ():void=>{
-        let currentLetter = "";
-        let pattern:RegExp;
-        let numberOfCoincidencesPickedWord = 0;
-        for (let i=0; i<MAX_WORD_SIZE; i++){
-            currentLetter = this.#currentWord[i];
-            pattern = new RegExp(currentLetter,"g");
-            numberOfCoincidencesPickedWord = (this.#pickedWord.match(pattern)||[]).length;
-            if (numberOfCoincidencesPickedWord==0) this.#userInterface.changeBackgroundPosition(this.#turn, i, "wrongLetter");
-        }
-    }
+*/
 
     updateAfterANewWord = ():void=>{
-        this.checkRightLetters();
-        this.checkMisplacedLetters();
-        this.checkWrongLetters();
+        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
+        //this.checkMisplacedLetters();
+        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
         this.#turn = this.#turn + 1;
         this.#currentPosition = 0;
         this.#currentWord = "";
