@@ -65,13 +65,16 @@ export class Game {
         }
     }
 
-    updateAfterANewWord = ():void=>{
-        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
-        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
+    setStateAfterANewWord():void{
         this.#turn = this.#turn + 1;
         this.#currentPosition = 0;
         this.#currentWord = "";
+    }
+
+    updateUIAfterANewWord = ():void=>{
+        WordUtilities.checkRightLetters(this.#pickedWord, this.#currentWord, this.#turn);
+        WordUtilities.checkMisplacedLetters(this.#pickedWord, this.#currentWord, this.#turn);
+        WordUtilities.checkWrongLetters(this.#pickedWord, this.#currentWord, this.#turn);
     }
 
     checkGameIsOver():void{

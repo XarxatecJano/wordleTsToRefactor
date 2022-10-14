@@ -5,7 +5,8 @@ export class EnterKey extends Key {
         if (super.game.currentWord.length == MAX_WORD_SIZE) {
             super.game.checkWordIsRight();
             super.game.checkGameIsOver();
-            super.game.updateAfterANewWord();
+            super.game.updateUIAfterANewWord();
+            super.game.setStateAfterANewWord();
         }
     }
 }
