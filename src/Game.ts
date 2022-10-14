@@ -15,6 +15,7 @@ export class Game {
         this.#currentPosition = 0;
         this.#userInterface = new UIChanger();
     }
+    //Hola buenos días//
 
     get pickedWord(){
         return this.#pickedWord;
